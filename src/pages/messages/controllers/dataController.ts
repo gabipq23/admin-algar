@@ -101,9 +101,8 @@ export function useContactsController() {
   };
 
   const contacts =
-    contactsQuery?.messages?.filter(
-      (contact) => contact.company === "BRISANET",
-    ) || [];
+    contactsQuery?.messages?.filter((contact) => contact.company === "ALGAR") ||
+    [];
 
   return {
     changeContactStatus,
