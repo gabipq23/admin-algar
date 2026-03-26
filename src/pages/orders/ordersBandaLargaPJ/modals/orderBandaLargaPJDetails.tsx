@@ -173,7 +173,7 @@ export function OrderBandaLargaPJDetailsModal({
         due_day: values.due_day,
       };
 
-      let selectedPlan = planBLPFStock.find(
+      let selectedPlan = planBLPJStock.find(
         (plan: any) => plan.id === normalizedValues.plan_id,
       );
       if (!selectedPlan && localData?.plan) {
