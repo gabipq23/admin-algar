@@ -5,7 +5,6 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { parseBRLInput } from "@/utils/formatBRL";
-import { ProductsService, type CreatedProductResponse } from "@/services/products";
 import type { ProductExtraGroup } from "@/interfaces/products";
 import type { ExtraGroupFormValue } from "../components/ProductBLExtrasBuilder";
 import { normalizeExtras } from "./productBL.helpers";
@@ -13,6 +12,7 @@ import { ProductBLDetailFields } from "../components/ProductBLDetailFields";
 import { ProductBLExtrasFields } from "../components/ProductBLExtrasFields";
 import { ProductBLHeaderPricingFields } from "../components/ProductBLHeaderPricingFields";
 import { defaultOutlineButtonClass } from "@/utils/buttonStyles";
+import { CreatedProductResponse, ProductsService } from "@/services/products";
 
 type UploadFormFile = {
     originFileObj?: File;
