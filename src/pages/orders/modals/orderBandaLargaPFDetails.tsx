@@ -2,12 +2,12 @@ import { ConfigProvider, Modal, Form } from "antd";
 import { useState, useEffect } from "react";
 import { OrderBandaLargaPFDisplay } from "./BLPFDisplay";
 import { OrderBandaLargaPFEdit } from "./BLPFEdit";
-import HeaderInputs from "../../../../components/orders/headerInputs";
 import dayjs from "dayjs";
 import ConfirmDeleteModal from "@/components/confirmDeleteModal";
 import FooterButtons from "@/components/orders/footerButtons";
 import { generatePDF } from "../controllers/exportPDF";
 import { OrderBandaLarga } from "@/interfaces/orderBandaLarga";
+import HeaderInputs from "@/components/orders/headerInputs";
 
 export function OrderBandaLargaPFDetailsModal({
   isModalOpen,

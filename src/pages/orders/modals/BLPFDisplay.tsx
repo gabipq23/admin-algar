@@ -12,21 +12,20 @@ import { Button, ConfigProvider, Form, Input } from "antd";
 import { useEffect } from "react";
 import { ExclamationOutlined } from "@ant-design/icons";
 import { EmpresasDisplay } from "@/components/empresasDisplay";
-import { formatCNPJ } from "@/utils/formatCNPJ";
 import { OrderBandaLarga } from "@/interfaces/orderBandaLarga";
 import { formatPaymentMethod } from "@/utils/formatPaymentMethod";
-import { AvailabilityStatus, PAPStatus } from "../../../../components/orders/availabilityLayout";
-import { PlanosTable } from "../../../../components/orders/PlanosTable";
+import { PlanosTable } from "@/components/orders/PlanosTable";
+import { AvailabilityStatus, PAPStatus } from "@/components/orders/availabilityLayout";
 
-interface OrderBandaLargaPJDisplayProps {
+interface OrderBandaLargaPFDisplayProps {
   localData: OrderBandaLarga;
   updateOrderData: any;
 }
 
-export function OrderBandaLargaPJDisplay({
+export function OrderBandaLargaPFDisplay({
   localData,
   updateOrderData,
-}: OrderBandaLargaPJDisplayProps) {
+}: OrderBandaLargaPFDisplayProps) {
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -49,7 +48,7 @@ export function OrderBandaLargaPJDisplay({
     const isCoveredByRange = Boolean(found_via_range);
     const hasUnicCep = Boolean(single_zip_code);
 
-    if (status === "FECHADO") {
+    if (status === "FECHADO" || status === "fechado") {
       if (noAvailability) {
         scenarios.push({
           color: "#ffeaea",
@@ -71,7 +70,7 @@ export function OrderBandaLargaPJDisplay({
     }
 
     if (
-      status === "FECHADO" &&
+      (status === "FECHADO" || status === "fechado") &&
       !hasUnicCep &&
       !isCoveredByRange &&
       !noAvailability
@@ -154,35 +153,11 @@ export function OrderBandaLargaPJDisplay({
         </div>
       </div>
 
-      {/* Informações da Empresa */}
+      {/* Informações do Cliente */}
       <div className="flex flex-col bg-neutral-100 mb-3 rounded-[4px] p-3 w-full">
         <div className="flex items-center mb-3">
           <h2 className="text-[14px] text-[#666666] font-medium">
-            Informações da Empresa
-          </h2>
-        </div>
-
-        <div className="flex flex-col text-neutral-800 gap-2 rounded-lg ">
-          <div className="bg-white rounded-md p-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <DisplayGenerator
-                title="CNPJ"
-                value={formatCNPJ(localData.cnpj || "")}
-              />
-              <DisplayGenerator
-                title="Razão Social"
-                value={localData.company_legal_name}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Informações do Gestor */}
-      <div className="flex flex-col bg-neutral-100 mb-3 rounded-[4px] p-3 w-full">
-        <div className="flex items-center mb-3">
-          <h2 className="text-[14px] text-[#666666] font-medium">
-            Informações do Gestor
+            Informações do Cliente
           </h2>
         </div>
 
@@ -210,7 +185,7 @@ export function OrderBandaLargaPJDisplay({
               />
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <DisplayGenerator title="Nome:" value={localData.manager_name} />
+              <DisplayGenerator title="Nome:" value={localData.full_name} />
               <DisplayGenerator
                 title="Nome (RFB):"
                 value={localData.rfb_name}
@@ -227,8 +202,22 @@ export function OrderBandaLargaPJDisplay({
               />
               <DisplayGenerator title="CPF:" value={formatCPF(localData.cpf)} />
 
-
-
+              <DisplayGenerator
+                title="Data de Nascimento:"
+                value={localData.birth_date}
+              />
+              <DisplayGenerator
+                title="Data Nascimento (RFB):"
+                value={localData.rfb_birth_date}
+              />
+              <DisplayGenerator
+                title="Nome da Mãe:"
+                value={localData.mother_full_name}
+              />
+              <DisplayGenerator
+                title="Nome Mãe (RFB):"
+                value={localData.rfb_mother_name}
+              />
               <DisplayGenerator title="Email:" value={localData.email} />
             </div>
           </div>
@@ -374,6 +363,7 @@ export function OrderBandaLargaPJDisplay({
                 title="Complemento:"
                 value={localData.address_complement}
               />
+
               <DisplayGenerator title="Bairro:" value={localData.district} />
               <DisplayGenerator title="Cidade:" value={localData.city} />
               <DisplayGenerator title="UF:" value={localData.state} />

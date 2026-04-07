@@ -235,7 +235,7 @@ export function ModalDelete({
               paddingBottom: "8px",
             }}
           >
-            <Button
+            <Button className={defaultOutlineButtonClass}
               variant="outlined"
               onClick={() => setShowDeleteModal(false)}
               style={{
@@ -323,7 +323,7 @@ export function ModalDisconnect({
               paddingBottom: "8px",
             }}
           >
-            <Button
+            <Button className={defaultOutlineButtonClass}
               variant="outlined"
               onClick={() => setShowDisconnectModal(false)}
               style={{
