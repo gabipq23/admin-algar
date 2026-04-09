@@ -100,6 +100,8 @@ export function OrderBandaLargaPFDetailsModal({
 
   useEffect(() => {
     if (localData && isEditing) {
+      const addressComplement = localData.address_complement || null;
+
       form.setFieldsValue({
         plan_id: localData.plan?.id || "",
         plan_name: localData.plan?.name || "",
@@ -113,11 +115,17 @@ export function OrderBandaLargaPFDetailsModal({
         email: localData.email,
         address: localData.address,
         address_number: localData.address_number,
-        address_complement: localData.address_complement,
-        address_lot: localData.address_lot,
-        address_floor: localData.address_floor,
-        address_block: localData.address_block,
-        building_or_house: localData.building_or_house,
+        address_complement: {
+          lot: addressComplement?.lot || localData.address_lot || "",
+          block: addressComplement?.block || localData.address_block || "",
+          floor: addressComplement?.floor || localData.address_floor || "",
+          square: addressComplement?.square || localData.address_block || "",
+          unit_type: addressComplement?.unit_type || "",
+          unit_number: addressComplement?.unit_number || "",
+          building_or_house: addressComplement?.building_or_house || localData.building_or_house || "house",
+          home_complement: addressComplement?.home_complement || "",
+          reference_point: addressComplement?.reference_point || localData.address_reference_point || "",
+        },
         district: localData.district,
         city: localData.city,
         state: localData.state,
@@ -141,7 +149,6 @@ export function OrderBandaLargaPFDetailsModal({
         wants_esim: localData.wants_esim,
         line_number_informed: localData.line_number_informed,
         line_action: localData.line_action,
-        address_reference_point: localData.address_reference_point,
         due_day: localData.due_day,
         accept_offers: localData.accept_offers,
         terms_accepted: localData.terms_accepted,
@@ -156,6 +163,25 @@ export function OrderBandaLargaPFDetailsModal({
       setLoading(true);
       const values = await form.validateFields();
 
+      const addressComplement = {
+        lot: values.address_complement?.lot ?? null,
+        block:
+          values.address_complement?.block ??
+          values.address_complement?.square ??
+          null,
+        floor: values.address_complement?.floor ?? null,
+        square: values.address_complement?.square ?? null,
+        unit_type: values.address_complement?.unit_type ?? null,
+        unit_number: values.address_complement?.unit_number ?? null,
+        building_or_house:
+          values.address_complement?.building_or_house ||
+          localData?.address_complement?.building_or_house ||
+          localData?.building_or_house ||
+          "house",
+        home_complement: values.address_complement?.home_complement ?? null,
+        reference_point: values.address_complement?.reference_point ?? null,
+      };
+
       const normalizedValues = {
         ...values,
         full_name: values.full_name,
@@ -163,15 +189,15 @@ export function OrderBandaLargaPFDetailsModal({
         mother_full_name: values.mother_full_name,
         additional_phone: values.additional_phone,
         address_number: values.address_number,
-        address_complement: values.address_complement,
-        address_lot: values.address_lot,
-        address_reference_point: values.address_reference_point,
+        address_complement: addressComplement,
+        address_lot: addressComplement.lot,
+        address_reference_point: addressComplement.reference_point,
         wants_esim: values.wants_esim,
         line_number_informed: values.line_number_informed,
         line_action: values.line_action,
-        address_floor: values.address_floor,
-        address_block: values.address_block,
-        building_or_house: values.building_or_house,
+        address_floor: addressComplement.floor,
+        address_block: addressComplement.square,
+        building_or_house: addressComplement.building_or_house,
         zip_code: values.zip_code,
         single_zip_code: values.single_zip_code,
         due_day: typeof values.due_day === "number" ? String(values.due_day) : values.due_day,
