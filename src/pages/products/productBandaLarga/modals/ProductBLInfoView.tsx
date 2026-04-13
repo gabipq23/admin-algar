@@ -292,7 +292,7 @@ export default function ProductBLInfoView({
                                                                     </div>
                                                                 )}
                                                             <div className="space-y-2">
-                                                                {group.options.map((option, optionIdx) => (
+                                                                {group?.options?.map((option, optionIdx) => (
                                                                     <div
                                                                         key={`${option.id}-${optionIdx}`}
                                                                         className="flex flex-col gap-1 border border-gray-100 rounded px-3 py-2"
@@ -413,7 +413,7 @@ export default function ProductBLInfoView({
                                                                 )}
 
                                                             <div className="space-y-2">
-                                                                {group.options.map((option, optionIdx) => {
+                                                                {group?.options?.map((option, optionIdx) => {
 
                                                                     return (
                                                                         <div
