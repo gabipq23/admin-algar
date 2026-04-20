@@ -37,7 +37,7 @@ export class BandaLargaService {
   }): Promise<OrderBandaLargaResponse> {
     const clientTypeFilter = type_client || client_type;
 
-    const res = await apiPurchase.get(`/algar/orders`, {
+    const res = await apiPurchase.get(`/telecom/algar/orders`, {
       params: {
         page,
         per_page,
@@ -61,14 +61,14 @@ export class BandaLargaService {
   }
 
   async updateBandaLargaOrderInfo(id: number, data: any): Promise<any> {
-    const response = await apiPurchase.put(`/algar/orders/${id}`, data);
+    const response = await apiPurchase.put(`/telecom/algar/orders/${id}`, data);
     return response.data;
   }
   async removeBandaLargaOrder(id: number) {
-    await apiPurchase.delete(`/algar/orders/${id}`);
+    await apiPurchase.delete(`/telecom/algar/orders/${id}`);
   }
 
   async changeBandaLargaOrderStatus(id: number, data: { status: string }) {
-    await apiPurchase.patch(`/algar/orders/${id}/status`, data);
+    await apiPurchase.patch(`/telecom/algar/orders/${id}/status`, data);
   }
 }
