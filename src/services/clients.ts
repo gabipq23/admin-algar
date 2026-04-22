@@ -29,7 +29,7 @@ export class ClientsService {
     credit_max?: number;
     cpf?: string;
   }): Promise<ICompanyResponse> {
-    const res = await apiPurchase.get(`/algar/clients`, {
+    const res = await apiPurchase.get(`/telecom/algar/clients`, {
       params: {
         page: page || 1,
         per_page: per_page || 100,
@@ -49,6 +49,6 @@ export class ClientsService {
   }
 
   async removeClient(clientId: number): Promise<void> {
-    await apiPurchase.delete(`/algar/clients/${clientId}`);
+    await apiPurchase.delete(`/telecom/algar/clients/${clientId}`);
   }
 }
