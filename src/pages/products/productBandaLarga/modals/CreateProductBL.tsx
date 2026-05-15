@@ -84,7 +84,7 @@ export default function CreateProductBL({
             form.resetFields();
             form.setFieldsValue({
                 online: true,
-                category: "Banda Larga",
+                category: "banda-larga",
             });
             setActiveExtrasTab("non_client");
         }
@@ -138,7 +138,7 @@ export default function CreateProductBL({
             const payload = {
                 company: "ALGAR",
                 business_partner: "ALGAR",
-                category: "Banda Larga",
+                category: "banda-larga",
                 landing_page: "banda_larga",
                 client_type: values.client_type || "",
                 uf: Array.isArray(values.uf) ? values.uf : [],
